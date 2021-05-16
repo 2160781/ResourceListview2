@@ -24,9 +24,6 @@
         <activity android:name=".Q_R_CODE">
 
         </activity>
-        <activity android:name=".Activity_facebook">
-
-        </activity>
     </application>
 
 </manifest>

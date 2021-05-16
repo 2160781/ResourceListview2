@@ -12,10 +12,14 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
+    private Adaptador adaptador;
+    private ArrayList<InformacaoListView1> arrayEntidad = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,41 +52,50 @@ public class MainActivity extends AppCompatActivity {
 
                 setContentView(R.layout.activity_listview);
 
-                listView = findViewById(R.id.listview);
+                listView = (ListView) findViewById(R.id.listview);
 
-                String[] values = new String[] {
-                        "1. Passo", "2. Passo", "3. Passo"};
+                Conteudos();
+                break;
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                                android.R.layout.simple_list_item_1,
-                                android.R.id.text1, values);
-
-                listView.setAdapter(adapter);
-
-
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if(position == 0){
-                            Intent intent = new Intent(view.getContext(),
-                                    Activity_facebook.class);
-                            startActivity(intent);
-                        }
-                        if(position == 1){
-                                Intent intent = new Intent(view.getContext(),
-                                        Activity_facebook.class);
-                                startActivity(intent);
-                            }
-                        if(position == 2){
-                            Intent intent = new Intent(view.getContext(),
-                                    Activity_facebook.class);
-                            startActivity(intent);
-                        }
-                    }
-                });
 
             }
                 return true;
 
+    }
+
+    private void Conteudos(){
+        arrayEntidad.add(new InformacaoListView1(R.drawable.ingredientesbolo,
+                "1. Passo --> Preparação de ingredientes:",
+                "1) 2 colheres de açúcar;\n" +
+                        "2) 3 colheres de farinha de trigo;\n" +
+                        "3) 4 colheres de margarina;\n" +
+                        "4) 3 ovos;\n" +
+                        "5) 3 colheres de leite;\n" +
+                        "6) 1 colher bem cheia de fermento em pó."));
+        arrayEntidad.add(new InformacaoListView1(R.drawable.misturaingredientesbolo,
+                "2. Passo --> Mistura de ingredientes:",
+                "1) Bata as claras em neve e reserve;\n" +
+                        "\n" +
+                        "2) Misture as gemas, a margarina e o açúcar até obter uma massa homogênea;\n" +
+                        "\n" +
+                        "3) Acrescente o leite e a farinha de trigo aos poucos, sem parar de bater;\n" +
+                        "\n" +
+                        "4) Adicione as claras em neve e o fermento."));
+        arrayEntidad.add(new InformacaoListView1(R.drawable.colocarbolonaforma,
+                "3. Passo --> Colocar o bolo na forma:",
+                "Despeje a massa em uma forma."));
+        arrayEntidad.add(new InformacaoListView1(R.drawable.bolocolocadoforno,
+                "4. Passo --> Coloque o bolo no forno:",
+                "Asse em forno médio 180 °C, preaquecido, por aproximadamente 40 " +
+                        "minutos ou ao furar o bolo com um garfo, este saia limpo."));
+        arrayEntidad.add(new InformacaoListView1(R.drawable.boloobtido,
+                "5. Passo --> Finalizar o bolo", "1) Retire o bolo do forno;\n" +
+                "\n" +
+                "2) Coloque o bolo num prato;\n" +
+                "\n" +
+                "3) Corte o bolo e prove-o"));
+
+        adaptador = new Adaptador(this, arrayEntidad);
+        listView.setAdapter(adaptador);
     }
 }
